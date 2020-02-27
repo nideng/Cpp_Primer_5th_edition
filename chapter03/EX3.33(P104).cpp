@@ -1,0 +1,3 @@
+/*
+the elements in array are undefined
+*/
