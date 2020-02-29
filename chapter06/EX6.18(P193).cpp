@@ -1,0 +1,4 @@
+/* 
+(a) bool compare(const matrix&, const matrix&)
+(b) vector<int>::iterator change_val(int, vector<int>::iterator)
+*/
