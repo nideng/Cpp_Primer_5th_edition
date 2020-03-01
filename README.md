@@ -13,6 +13,8 @@
 * [chapter04](https://github.com/nideng/Cpp_Primer_5th_edition/tree/master/chapter04)<br>
 ####
 * [chapter05](https://github.com/nideng/Cpp_Primer_5th_edition/tree/master/chapter05)<br>
+####
+* [chapter06](https://github.com/nideng/Cpp_Primer_5th_edition/tree/master/chapter06)<br>
 
 
 
