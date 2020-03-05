@@ -1,0 +1,3 @@
+/*
+value equal to the first element
+*/

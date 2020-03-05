@@ -1,0 +1,5 @@
+/*
+if the container holds elements of a class type and 
+resize adds elements we must supply an initializer or
+the element type must have a default constructor.
+*/
