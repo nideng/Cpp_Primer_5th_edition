@@ -1,16 +1,21 @@
-/*
-At present, I don't know how to solve this problem
-*/
 #include<iostream>
+#include<sstream>
 #include<string>
+#include<map>
 using namespace std;
-
-string s1("hello ");
-string s2("world");
-
-int main(const string&s1, const string&s2)
+map<char, char>m1{ {',',' '},{'/',' '} };
+int main()
 {
-	string s3 = s1 + s2;
-	cout << s3 << endl;
+	string str1("January 1,1990");
+	for (auto& e : str1)
+	{
+		auto map_it = m1.find(e);
+		if (map_it != m1.end())
+			e = map_it->second;
+	}
+	istringstream in(str1);
+	string word;
+	while (in >> word)
+		cout << word << endl;
 	return 0;
 }
