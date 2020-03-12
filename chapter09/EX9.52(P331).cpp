@@ -4,83 +4,83 @@
 #include<stdexcept>
 #include<deque>
 using namespace std;
-enum obj_type { LP, RP, ADD, SUB, VAL };
-struct obj
+enum Type_list { LP, RP, ADD, SUB, VAL };
+struct Element
 {
-    obj(obj_type type, double val = 0) { t = type; v = val; }
-    obj_type t;
-    double v;
+    Element(Type_list type, double val = 0) { typeID = type; Value = val; }
+    Type_list typeID;
+    double Value;
 };
-inline void skipws(string& exp, size_t& p)
+inline void skip_space(string& exp, size_t& p)
 {
     p = exp.find_first_not_of(" ", p);
 }
-inline void new_val(stack<obj>& so, double v)
+inline void new_val(stack<Element>& so, double v)
 {
-    if (so.empty() || so.top().t == LP)
+    if (so.empty() || so.top().typeID == LP)
     {
-        so.push(obj(VAL, v));
+        so.push(Element(VAL, v));
     }
-    else if (so.top().t == ADD || so.top().t == SUB)
+    else if (so.top().typeID == ADD || so.top().typeID == SUB)
     {
-        obj_type type = so.top().t;
+        Type_list type = so.top().typeID;
         so.pop();
         if (type == ADD)
-            v += so.top().v;
+            v += so.top().Value;
         else
-            v = so.top().v - v;
+            v = so.top().Value - v;
         so.pop();
-        so.push(obj(VAL, v));
+        so.push(Element(VAL, v));
     }
     else
-        throw invalid_argument("»±…Ÿ‘ÀÀ„∑˚");
+        throw invalid_argument("invalid expression");
 }
 
 int main(int argc, char** argv)
 {
-    stack<obj>so;
+    stack<Element>so;
     string exp;
     size_t p = 0, q;
     double v;
 
-    cout << "«Î ‰»Î±Ì¥Ô Ω" << endl;
+    cout << "enter an expression:" << endl;
     getline(cin, exp);
     while (p < exp.size())
     {
-        skipws(exp, p);
+        skip_space(exp, p);
         if (exp[p] == '(')
         {
-            so.push(obj(LP));
+            so.push(Element(LP));
             p++;
         }
         else if ((exp[p] == '+') || exp[p] == '-')
         {
-            if (so.empty() || so.top().t != VAL)
-                throw invalid_argument("»±…Ÿ‘ÀÀ„∑˚");
+            if (so.empty() || so.top().typeID != VAL)
+                throw invalid_argument("short of value");
             if (exp[p] == '+')
-                so.push(obj(ADD));
+                so.push(Element(ADD));
             else
-                so.push(obj(SUB));
+                so.push(Element(SUB));
             p++;
         }
         else if (exp[p] == ')')
         {
             p++;
             if (so.empty())
-                throw invalid_argument("Œ¥∆•≈‰”“¿®∫≈");
-            if (so.top().t == LP)
-                throw invalid_argument("ø’¿®∫≈");
-            if (so.top().t == VAL)
+                throw invalid_argument("invalid expression");
+            if (so.top().typeID == LP)
+                throw invalid_argument("empty bracket");
+            if (so.top().typeID == VAL)
             {
-                v = so.top().v;
+                v = so.top().Value;
                 so.pop();
-                if (so.empty() || so.top().t != LP)
-                    throw invalid_argument("Œ¥∆•≈‰”“¿®∫≈");
+                if (so.empty() || so.top().typeID != LP)
+                    throw invalid_argument("invalid expression");
                 so.pop();
                 new_val(so, v);
             }
             else
-                throw invalid_argument("»±…Ÿ‘ÀÀ„∑˚");
+                throw invalid_argument("invalid expression");
 
         }
         else
@@ -90,10 +90,10 @@ int main(int argc, char** argv)
             new_val(so, v);
         }
     }
-    if (so.size() != 1 || so.top().t != VAL)
+    if (so.size() != 1 || so.top().typeID != VAL)
     {
-        throw invalid_argument("∑«∑®±Ì¥Ô Ω");
+        throw invalid_argument("invalid expression");
     }
-    cout << so.top().v << endl;
+    cout << so.top().Value << endl;
     return 0;
 }
