@@ -17,7 +17,7 @@ public:
 	book(const string& is, const string& bn,
 		const string& au, const string& ed, const string& pu, double pr)
 		:isbn(is), bookName(bn), author(au), edition(ed), pubdate(pu), price(pr) {}
-	book(istream& = cin);
+	book(istream&);
 	//other funcitons;
 };
 book::book(istream& is)

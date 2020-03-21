@@ -1,0 +1,4 @@
+/*
+An overloaded operator function has the same number of 
+parameters as the operator has operands
+*/
