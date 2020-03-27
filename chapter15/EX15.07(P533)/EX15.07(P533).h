@@ -28,7 +28,10 @@ public:
 	Book_sales_derive(const string&, double,double,size_t);
 	double net_price(size_t cnt)const
 	{
+		if(cnt>=max_num)
 		return max_num * (1 - discount) * price + (cnt - max_num) * price;
+		else
+		return cnt*(1-discount)*price;
 	}
 private:
 	size_t max_num=0;
