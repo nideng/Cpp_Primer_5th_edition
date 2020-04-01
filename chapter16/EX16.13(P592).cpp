@@ -1,0 +1,3 @@
+/*
+General friendship that each instantiation of BlobPtr grants access to the version of the equality and relational operators instantiated with the same type.
+*/

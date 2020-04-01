@@ -1,0 +1,3 @@
+/*
+when input the q to quit runQueries function.
+*/
